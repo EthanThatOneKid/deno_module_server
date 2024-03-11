@@ -24,7 +24,8 @@ async function handle(request: Request): Promise<Response> {
     plugins: [...denoPlugins()],
     write: false,
   });
-  const code = result.outputFiles.find((file) => file.path === "<stdout>");
+  const code = result.outputFiles
+    .find((file: Record<PropertyKey, unknown>) => file.path === "<stdout>");
   if (!code) {
     return new Response("No output", { status: 500 });
   }
